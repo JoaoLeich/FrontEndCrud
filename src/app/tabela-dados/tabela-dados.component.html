@@ -1,0 +1,41 @@
+<div class="style">
+    <table mat-table [dataSource]="ELEMENT_DATA" class="mat-elevation-z8 tabela-style">
+
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> ID </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="nome">
+            <th mat-header-cell *matHeaderCellDef> Nome </th>
+            <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="categoria">
+            <th mat-header-cell *matHeaderCellDef> Categoria </th>
+            <td mat-cell *matCellDef="let element"> {{element.categoria}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="dataPublicacao">
+            <th mat-header-cell *matHeaderCellDef> Data De Publicacao </th>
+            <td mat-cell *matCellDef="let element"> {{element.dataPublicacao | date:'dd/MM/yyyy'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="acoes">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let row">
+                <div class="button-group botao">
+                    <button mat-stroked-button (click)="editar(row.id)">
+                        Editar
+                    </button>
+                    <button mat-stroked-button (click)="deletar(row.id)">
+                        Excluir
+                    </button>
+                </div>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>

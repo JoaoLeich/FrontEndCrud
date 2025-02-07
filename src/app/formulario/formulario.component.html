@@ -1,0 +1,48 @@
+<form [formGroup]="formulario" class="formulario">
+
+    @if(!showBtnCadastrar)
+    {
+    <mat-form-field>
+        <mat-label>Id Do Livro</mat-label>
+        <input matInput type="number" placeholder="0" [readonly]="true" formControlName="idLivro">
+    </mat-form-field>
+    }
+
+    <mat-form-field>
+        <mat-label>Nome Do Livro</mat-label>
+        <input matInput placeholder="Ex. Senhor Dos Anéis" type="text" formControlName="nomeLivro">
+        @if(formulario.get('nomeLivro').hasError('minlength') || formulario.get('nomeLivro').touched)
+        {
+        <mat-error>O Nome Do Livro Deve Conter Mais Que 3 Letras!</mat-error>
+        }
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Categoria Do Livro</mat-label>
+        <input matInput placeholder="Ex. Fantasia" type="text" formControlName="categoriaLivro">
+        @if(formulario.get('categoriaLivro').hasError('minlength') || formulario.get('nomeLivro').touched)
+        {
+        <mat-error>A Categoria Do Livro Deve Conter Mais Que 3 Letras!</mat-error>
+        }
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Data De Publicação</mat-label>
+        <input matInput [matDatepicker]="picker" placeholder="0/00/0000" formControlName="dataPublicacao">
+        @if(formulario.get('dataPublicacao').hasError('required') || formulario.get('nomeLivro').touched)
+        {
+        <mat-error>A Data De Publicação Deverá Ser Informada!</mat-error>
+        }
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    @if(showBtnCadastrar)
+    {
+    <button mat-stroked-button class="btnStyle" type="button" (click)="Cadastrar()">Adicionar Livro</button>
+    }@else
+    {
+    <button mat-stroked-button class="btnStyle" type="button" (click)="Alterar()">Alterar Livro</button>
+    <button mat-stroked-button class="btnStyle" type="button" (click)="Cancelar()">Cancelar</button>
+    }
+</form>
